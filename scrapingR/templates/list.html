@@ -15,7 +15,15 @@
 		<link rel="stylesheet" href="/static/front/assets/css/main.css " />
 	</head>
 	<body class="is-preload">
-
+<style>
+		/* Set the background image for the div element */
+		#background {
+			background-image: url('/static/front/images/home.jpg');
+			background-size:90%;
+			opacity: 0.5;
+		}
+	</style>
+</style>
 		<!-- Header -->
 			<header id="header">
 				<a class="logo" href="index.html">Industrious</a>
@@ -47,64 +55,28 @@
 			<section class="wrapper">
 				<div class="inner">
 					<header class="special">
-						<h2>Sem turpis amet semper</h2>
-						<p>In arcu accumsan arcu adipiscing accumsan orci ac. Felis id enim aliquet. Accumsan ac integer lobortis commodo ornare aliquet accumsan erat tempus amet porttitor.</p>
+						<div class="row gtr-uniform">	
+						<div class="col-6 col-12-xsmall">
+							<form method="GET" action="{% url 'list' %}">
+								<input type="text" name="adresse" value="{{ request.GET.adresse }}" placeholder="Adresse">
+								<input type="text" name="link" value="{{ request.GET.link }}" placeholder="Link">
+								<br><br><button type="submit" class="primary">Search</button>
+							</form>
+						</div>
+						</div>
 					</header>
 					<div class="highlights">
-						<section>
+						{% for annonce in annonces %}
+						<section >
 							<div class="content">
 								<header>
-									<a href="#" class="icon fa-vcard-o"><span class="label">Icon</span></a>
-									<h3>Feugiat consequat</h3>
+									<i class="fa fa-home"aria-hidden="true"></i>
+									<h3><b>{{ annonce.ANNONCE_LINK }}</b></h3>
 								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+								<p>{{ annonce.ANNONCE_TEXT }}</p>
 							</div>
 						</section>
-						<section>
-							<div class="content">
-								<header>
-									<a href="#" class="icon fa-files-o"><span class="label">Icon</span></a>
-									<h3>Ante sem integer</h3>
-								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
-							</div>
-						</section>
-						<section>
-							<div class="content">
-								<header>
-									<a href="#" class="icon fa-floppy-o"><span class="label">Icon</span></a>
-									<h3>Ipsum consequat</h3>
-								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
-							</div>
-						</section>
-						<section>
-							<div class="content">
-								<header>
-									<a href="#" class="icon fa-line-chart"><span class="label">Icon</span></a>
-									<h3>Interdum gravida</h3>
-								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
-							</div>
-						</section>
-						<section>
-							<div class="content">
-								<header>
-									<a href="#" class="icon fa-paper-plane-o"><span class="label">Icon</span></a>
-									<h3>Faucibus consequat</h3>
-								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
-							</div>
-						</section>
-						<section>
-							<div class="content">
-								<header>
-									<a href="#" class="icon fa-qrcode"><span class="label">Icon</span></a>
-									<h3>Accumsan viverra</h3>
-								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
-							</div>
-						</section>
+						{% endfor %}
 					</div>
 				</div>
 			</section>
@@ -169,12 +141,7 @@
 			</section>
 
 <body>
-    <h1> List</h1>
-    <ul>
-        {% for produit in produits %}
-        <li> - {{ produit.titre }}</li>
-        {% endfor %}
-    </ul>
+
 
 		<!-- Footer -->
         <footer id="footer">

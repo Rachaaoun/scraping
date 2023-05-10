@@ -21,5 +21,4 @@ from scrapingR.views import list
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('list/', list, name='list'),
-    path('filtre/', list, name='filter'),
 ]

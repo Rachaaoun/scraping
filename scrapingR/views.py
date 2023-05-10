@@ -3,27 +3,23 @@ from django.shortcuts import render
 # Create your views here.
 
 from django.shortcuts import render
-from .models import Produit
-from django.db.models import Q
+from .models import annonce
+
+
+min_price = 10
+max_price = 50
 
 def list(request):
-    produits = Produit.objects.all()
-    return render(request, 'list.html', {'produits': produits})
+    if request.method == 'GET':
+        search_query_link = request.GET.get('link', '')
+        search_query_prix = request.GET.get('prix', '')
+        if(search_query_link != '') :
+            annonces = annonce.objects.filter(ANNONCE_LINK__icontains=search_query_link)
+        elif(search_query_prix!= '') :
+            annonces = annonce.objects.filter(annonce(prix__gte=min_price) & annonce(prix__lte=max_price))
+        else:
+            annonces = annonce.objects.all()
+    else:
+        annonces = annonce.objects.all()
+    return render(request, 'list.html', {'annonces': annonces})
 
-def filter(request):
-    produitF =Produit.objects.filter(titre='racha')
-    return render(request, 'filter.html', {'produits': produitF})
-
-def filter(request):
-    query = request.GET.get("q", None)
-    qs = Produit.objects.all()
-    if query is not None:
-        qs = qs.filter(
-                Q(titre__icontains=query)
-                )
-
-    context = {
-        "list": qs,
-    }
-    template = "filter.html"
-    return render(request, template, context)

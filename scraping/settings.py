@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'scraping.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'scc',
+        'NAME': 'immobilier',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
