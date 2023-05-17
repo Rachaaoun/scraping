@@ -7,7 +7,7 @@
 {% load static %}
 <html>
 	<head>
-		<title>Industrious by TEMPLATED</title>
+		<title>Scraping</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<meta name="description" content="" />
@@ -22,11 +22,18 @@
 			background-size:90%;
 			opacity: 0.5;
 		}
+		.shadowbox {
+  width: 40em;
+  border: 1px solid #333;
+  box-shadow: 8px 8px 5px #444;
+  padding: 8px 12px;
+  background-image: linear-gradient(180deg, #fff, #ddd 40%, #ccc);
+}
 	</style>
 </style>
 		<!-- Header -->
 			<header id="header">
-				<a class="logo" href="index.html">Industrious</a>
+				<a class="logo" href="index.html">Scraping</a>
 				<nav>
 					<a href="#menu">Menu</a>
 				</nav>
@@ -44,10 +51,9 @@
 		<!-- Banner -->
 			<section id="banner">
 				<div class="inner">
-					<h1>Industrious</h1>
-					<p>A responsive business oriented template with a video background<br />
-					designed by <a href="https://templated.co/">TEMPLATED</a> and released under the Creative Commons License.</p>
-				</div>
+					<h1>Scraping</h1>
+					<p>Created By Racha Aoun , Ahlem Sghaier , Houda Rafrafi , Soulaima Nouichi , Chiraz Dridi<br />
+						</div>
 				<video autoplay loop muted playsinline src="{% static 'front/images/banner.mp4' %}"></video>
 			</section>
 
@@ -65,19 +71,24 @@
 						</div>
 						</div>
 					</header>
+					{% for annonce in annonces %}
 					<div class="highlights">
-						{% for annonce in annonces %}
 						<section >
-							<div class="content">
-								<header>
-									<i class="fa fa-home"aria-hidden="true"></i>
-									<h3><b>{{ annonce.ANNONCE_LINK }}</b></h3>
-								</header>
+							<div class="shadowbox">
+								
+								<h3><b><a href={{annonce.ANNONCE_LINK}}>{{ annonce.ANNONCE_LINK }}</a></b></h3>
+								
 								<p>{{ annonce.ANNONCE_TEXT }}</p>
+								<b><h4 style="color:red; position:center;">Prix : {{ annonce.PRIX }}</h5></b>
+			
+									<b><h4 style="color:red; position:center;">{{ annonce.NB_PIECE }} Lits</h5></b>
+					
+							
 							</div>
+							
 						</section>
-						{% endfor %}
 					</div>
+					{% endfor %}
 				</div>
 			</section>
 
