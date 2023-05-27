@@ -23,3 +23,23 @@ def list(request):
         annonces = annonce.objects.all()
     return render(request, 'list.html', {'annonces': annonces})
 
+
+def sortbyprice(request):
+    biens_immobiliers = BiensImmobilier.objects.all().order_by('prix')
+    return render(request, 'list.html', {'annonces': biens_immobiliers})
+
+def sortby_price(request):
+    biens_immobiliers = BiensImmobilier.objects.all().order_by('-prix')
+    return render(request, 'list.html', {'annonces': biens_immobiliers})
+
+def sup_inf(request):
+    if 'inf' in request.POST:
+        query = request.POST.get('query')
+        biens_immobiliers = BiensImmobilier.objects.filter(prix__lt=query)
+        return render(request, 'list.html', {'annonces': biens_immobiliers})
+
+    else:
+        query = request.POST.get('query')
+        biens_immobiliers = BiensImmobilier.objects.filter(prix__gt=query)
+        return render(request, 'list.html', {'annonces': biens_immobiliers})
+
